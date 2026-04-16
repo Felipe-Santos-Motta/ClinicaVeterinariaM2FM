@@ -3,12 +3,13 @@ const router = express.Router();
 // Importação das Rotas
 const animalRoute = require('./animal.route');
 const tutorRoute = require('./tutor.route');
+const consultaRoute = require('./consulta.route');
 // Importação Seletiva de Middlewares
 const { autenticar, validarContentType } = require('../middlewares/main.middleware');
 
 // 1. Rota Raiz (Totalmente Pública)
 router.get('/', (req, res) => {
-  res.json({ sistema: 'Biblioteca Ralph & Teddy', status: 'Online' });
+  res.json({ sistema: 'Clínica Veterinária Ralph & Teddy', status: 'Online' });
 });
 
 // 2. Aplicando a "Barreira" de Segurança
@@ -17,8 +18,9 @@ router.use(autenticar);
 router.use(validarContentType);
 
 // 3. Rotas Protegidas
-router.use('/animals', animalRoute);
+router.use('/animais', animalRoute);
 router.use('/tutores', tutorRoute);
+router.use('/consultas', consultaRoute);
 
 // 4. Rota 404 - Caso nenhuma rota acima seja encontrada
 router.use((req, res) => {

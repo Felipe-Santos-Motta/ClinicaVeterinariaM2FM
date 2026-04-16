@@ -34,20 +34,17 @@ const buscaranimalPorId = async (req, res) => {
   }
 };
 
-// POST /animals — Cadastra novo animal
+// POST /animais — Cadastra novo animal
 const criaranimal = async (req, res) => {
   try {
-    // Extrai os dados do corpo da requisição
-    const { titulo, autor } = req.body;
-    const novoanimal = await animalService.criaranimal({ titulo, autor });
+    const { nome, especie, idade, tutorId } = req.body;
+    const novoanimal = await animalService.criaranimal({ nome, especie, idade, tutorId });
 
-    // 201 = Created — status correto para criação bem-sucedida
     res.status(201).json({
-      mensagem: 'animal cadastrado no acervo com sucesso!',
+      mensagem: 'Animal cadastrado com sucesso!',
       animal: novoanimal,
     });
   } catch (erro) {
-    // Se o Service lançou um erro de validação, retornamos 400
     res.status(400).json({ erro: erro.message });
   }
 };
