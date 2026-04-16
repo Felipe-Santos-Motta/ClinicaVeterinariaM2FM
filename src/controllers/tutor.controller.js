@@ -22,7 +22,7 @@ const buscartutorPorId = async (req, res) => {
 
     res.status(200).json({ tutor });
   } catch (erro) {
-    res.status(500).json({ erro: 'Erro interno ao buscar usuário.' });
+    res.status(500).json({ erro: 'Erro interno ao buscar tutor.' });
   }
 };
 

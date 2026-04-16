@@ -4,28 +4,26 @@
 
 const animalService = require('../services/animal.service');
 
-// GET /animals — Lista todos os animals
+// GET /animais — Lista todos os animais
 const listaranimals = async (req, res) => {
   try {
     const animals = await animalService.listarTodosanimals();
     res.status(200).json({ total: animals.length, animals });
   } catch (erro) {
-    res.status(500).json({ erro: 'Erro interno ao listar animals.' });
+    res.status(500).json({ erro: 'Erro interno ao listar animais.' });
   }
 };
 
-// GET /animals/:id — Busca animal por ID
+// GET /animais/:id — Busca animal por ID
 const buscaranimalPorId = async (req, res) => {
   try {
-    // Extrai o parâmetro da URL — essa é a responsabilidade do Controller
     const { id } = req.params;
     const animal = await animalService.buscaranimalPorId(id);
 
-    // Se o Service retornou null, o animal não existe
     if (!animal) {
       return res
         .status(404)
-        .json({ erro: `animal ${id} não encontrado no acervo.` });
+        .json({ erro: `Animal ${id} não encontrado.` });
     }
 
     res.status(200).json({ animal });
@@ -37,8 +35,8 @@ const buscaranimalPorId = async (req, res) => {
 // POST /animais — Cadastra novo animal
 const criaranimal = async (req, res) => {
   try {
-    const { nome, especie, idade, tutorId } = req.body;
-    const novoanimal = await animalService.criaranimal({ nome, especie, idade, tutorId });
+    const { nome, raca } = req.body;
+    const novoanimal = await animalService.criaranimal({ nome, raca });
 
     res.status(201).json({
       mensagem: 'Animal cadastrado com sucesso!',

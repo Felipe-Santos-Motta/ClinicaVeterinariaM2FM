@@ -5,23 +5,17 @@ const acervo = [
   {
     id: 1,
     nome: 'Teddy',
-    especie: 'Cão',
-    idade: 5,
-    tutorId: 1,
+    raca: 'Labrador',
   },
   {
     id: 2,
     nome: 'Mia',
-    especie: 'Gato',
-    idade: 3,
-    tutorId: 2,
+    raca: 'Siamês',
   },
   {
     id: 3,
     nome: 'Bolt',
-    especie: 'Coelho',
-    idade: 2,
-    tutorId: 3,
+    raca: 'Coelho Netherland Dwarf',
   },
 ];
 
@@ -37,17 +31,15 @@ const buscaranimalPorId = async (id) => {
 };
 
 // Criar um novo animal
-const criaranimal = async ({ nome, especie, idade, tutorId }) => {
-  if (!nome || !especie || !idade || !tutorId) {
-    throw new Error('Nome, espécie, idade e tutorId são obrigatórios.');
+const criaranimal = async ({ nome, raca }) => {
+  if (!nome || !raca) {
+    throw new Error('Nome e raça são obrigatórios.');
   }
 
   const novoanimal = {
     id: acervo.length + 1,
     nome,
-    especie,
-    idade: Number(idade),
-    tutorId: Number(tutorId),
+    raca,
   };
 
   acervo.push(novoanimal);
